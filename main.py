@@ -8,7 +8,7 @@ place = st.text_input("Place: ")
 days = st.slider("Forecast Days", min_value=1, max_value=5,
                  help="Select number of forecast days")
 option = st.selectbox("Select data to view",
-                      ("Temperature", "Sky"))
+                      ("Temperature C", "Temperature F", "Sky"))
 st.subheader(f"{option} for the next {days} days in {place}")
 
 if place:
@@ -16,12 +16,19 @@ if place:
         # Get temperature/sky data
         filtered_data = get_data(place=place, forcast_days=days)
 
-        if option == "Temperature":
-            # update formula for to get degree celsius from kelvin
-            temperature = [dic["main"]["temp"] - 273.15 for dic in filtered_data]
+        if option in ("Temperature C", "Temperature F"):
             dates = [dic["dt_txt"] for dic in filtered_data]
-            # create a temperature plot
-            figure = px.line(x=dates, y=temperature, labels={"x": "Date", "y": "Temperature (C)"})
+
+            if option[-1:] == "C":
+                # update formula for to get degree celsius from kelvin
+                temperature = [dic["main"]["temp"] - 273.15 for dic in filtered_data]
+                # create a temperature plot
+                figure = px.line(x=dates, y=temperature, labels={"x": "Date", "y": "Temperature (C)"})
+            else:
+                # update formula for to get degree celsius from kelvin
+                temperature = [(dic["main"]["temp"] - 273.15) * 1.8 + 32 for dic in filtered_data]
+                # create a temperature plot
+                figure = px.line(x=dates, y=temperature, labels={"x": "Date", "y": "Temperature (F)"})
             st.plotly_chart(figure)
 
         if option == "Sky":
