@@ -3,7 +3,7 @@ import os
 import streamlit as st
 
 # API_KEY = os.getenv("weather_api_key")
-API_KEY = "7147511e0613505f05495615ba5fe57c"
+API_KEY = st.secrets["weather_api_key"]
 
 
 def get_data(place, forcast_days):
