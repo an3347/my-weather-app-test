@@ -17,6 +17,7 @@ if place:
         filtered_data = get_data(place=place, forcast_days=days)
 
         if option == "Temperature":
+            # update formula for to get degree celsius from kelvin
             temperature = [dic["main"]["temp"] - 273.15 for dic in filtered_data]
             dates = [dic["dt_txt"] for dic in filtered_data]
             # create a temperature plot
