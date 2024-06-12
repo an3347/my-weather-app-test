@@ -1,6 +1,7 @@
 import requests
+import os
 
-API_KEY = "7147511e0613505f05495615ba5fe57c"
+API_KEY = os.getenv("weather_api_key")
 
 
 def get_data(place, forcast_days):
@@ -18,4 +19,4 @@ def get_data(place, forcast_days):
 
 
 if __name__ == "__main__":
-    print(get_data(place="TorontoA", forcast_days=3))
+    print(get_data(place="Toronto", forcast_days=5))

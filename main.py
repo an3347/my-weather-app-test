@@ -17,7 +17,7 @@ if place:
         filtered_data = get_data(place=place, forcast_days=days)
 
         if option == "Temperature":
-            temperature = [dic["main"]["temp"] / 10 for dic in filtered_data]
+            temperature = [dic["main"]["temp"] - 273.15 for dic in filtered_data]
             dates = [dic["dt_txt"] for dic in filtered_data]
             # create a temperature plot
             figure = px.line(x=dates, y=temperature, labels={"x": "Date", "y": "Temperature (C)"})
