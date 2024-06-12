@@ -19,4 +19,4 @@ def get_data(place, forcast_days):
 
 
 if __name__ == "__main__":
-    print(get_data(place="TorontoA", forcast_days=3))
+    print(get_data(place="Toronto", forcast_days=5))
